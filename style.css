@@ -1,0 +1,56 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: white;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  gap: 4em;
+}
+header {
+  font-size: 2rem;
+  padding: 0.2em;
+  background: #324376;
+  color: #f5dd90;
+  margin: 0.4em;
+  border-radius: 0.2em;
+  text-align: center;
+  display: flex;
+}
+.container {
+  background-color: #324376;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  grid-gap: 3px;
+}
+.cell {
+  min-height: 120px;
+  min-width: 120px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f5dd90;
+  font-size: 4rem;
+  cursor: pointer;
+}
+.restart-btn {
+  color: #324376;
+  background-color: #f5dd90;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: 0.2em;
+  padding: 0.3em;
+  cursor: pointer;
+  border: solid 2px #324376;
+  /* display: none; */
+}
+.game-status {
+  color: #324376;
+  font-size: 3rem;
+}
