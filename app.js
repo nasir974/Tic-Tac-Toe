@@ -1,13 +1,16 @@
 const initGame = (function () {
   const gameStatus = document.querySelector(".game-status");
   const restartBtn = document.querySelector(".restart-btn");
-  const board = new Array(9).fill(null);
-  const playerO = "O";
-  const playerX = "X";
-  let currentPlayer = playerX;
+  const board = new Array(9).fill("");
   const cell = document.querySelectorAll(".cell");
-  
-
+  const Player = (name, mark) => {
+    return { name, mark };
+  };
+  const playerX = Player("X", "X");
+  const playerO = Player("O", "O");
+  let currentPlayer = playerO;
+  let otherPlayer = playerX;
+  gameStatus.textContent = `${currentPlayer.name}'s turn`;
   const checkWinner = () => {
     const winningCombo = [
       [0, 1, 2],
@@ -25,11 +28,11 @@ const initGame = (function () {
         board[combo[0]] === board[combo[1]] &&
         board[combo[0]] === board[combo[2]]
       ) {
-        gameStatus.textContent = `${currentPlayer} Won!`;
+        gameStatus.textContent = `${otherPlayer.name} Won!`;
         restartBtn.style = `display:block;`;
         return;
       }
-      if (!board.includes(null) && !gameStatus.textContent.includes("Won")) {
+      if (!board.includes("") && !gameStatus.textContent.includes("Won")) {
         gameStatus.textContent = "Its a Tie";
         restartBtn.style = `display:block;`;
       }
@@ -37,20 +40,30 @@ const initGame = (function () {
   };
   const gamePlay = () => {
     function cellClicked(e) {
-      if (board.includes(null) && gameStatus.textContent.includes("Won")) {
+      const box = e.target;
+      if (!box === "") {
         return;
       }
-      const box = e.target;
-      board[box.id] = currentPlayer;
-      currentPlayer = currentPlayer === playerO ? playerX : playerO;
+      if (
+        (board.includes("") && gameStatus.textContent.includes("Won")) ||
+        !e.target === ""
+      ) {
+        return;
+      }
       if (currentPlayer === playerX && box.innerText === "") {
         box.style = `color: #324376;`;
       }
       if (box.innerText === "") {
-        box.innerText = currentPlayer;
+        board[box.id] = currentPlayer.mark;
+        box.innerText = currentPlayer.mark;
       } else {
         return;
       }
+
+      currentPlayer = currentPlayer === playerO ? playerX : playerO;
+      otherPlayer = otherPlayer === playerX ? playerO : playerX;
+      gameStatus.textContent = `${currentPlayer.name}'s turn`;
+
       checkWinner();
       restartGame();
     }

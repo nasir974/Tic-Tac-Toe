@@ -8,9 +8,9 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  gap: 4em;
+  gap: 0.5em;
 }
+
 header {
   font-size: 2rem;
   padding: 0.2em;
@@ -48,9 +48,15 @@ header {
   padding: 0.3em;
   cursor: pointer;
   border: solid 2px #324376;
-  /* display: none; */
+  display: none;
+  transition: all 0.2s;
+}
+.restart-btn:hover{
+    transform:translateY(-5px);
+    box-shadow:2px 2px 5px 1px #c9a326b7;
 }
 .game-status {
   color: #324376;
   font-size: 3rem;
 }
+
